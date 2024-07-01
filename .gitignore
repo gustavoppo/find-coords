@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 
-/utils/google-key.ts
+
+src/app/utils/google-key.ts
