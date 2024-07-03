@@ -1,0 +1,12 @@
+<p-card>
+  <google-map
+  height="400px"
+  width="750px"
+  [center]="center"
+  [zoom]="zoom"
+  (mapClick)="addMarker($event)">
+    @for (position of markerPositions; track position) {
+      <map-marker [position]="position" [options]="markerOptions" />
+    }
+</google-map>
+</p-card>

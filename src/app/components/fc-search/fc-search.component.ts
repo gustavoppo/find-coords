@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-fc-search',
+  selector: 'fc-search',
   standalone: true,
-  imports: [],
+  imports: [CardModule, ButtonModule],
   templateUrl: './fc-search.component.html',
-  styleUrl: './fc-search.component.css'
+  styleUrl: './fc-search.component.css',
 })
-export class FcSearchComponent {
-
+export class FcSearchComponent implements OnInit {
+  ngOnInit() {}
 }

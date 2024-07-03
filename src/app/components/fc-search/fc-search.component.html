@@ -1,1 +1,18 @@
-<p>fc-search works!</p>
+<div class="card flex justify-content-center">
+  <p-card header="Buscar local" [style]="{ width: '360px' }">
+    <div class="relative">
+      <input
+        class="input-cal input-base"
+        id="input"
+        placeholder=""
+        type="text"
+      />
+      <label id="label-input">Endereço</label>
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3 mt-1">
+        <p-button label="Buscar" class="w-full" styleClass="w-full" />
+      </div>
+    </ng-template>
+  </p-card>
+</div>

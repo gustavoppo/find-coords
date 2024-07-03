@@ -1,0 +1,49 @@
+#label-input {
+  transition: all 0.1s ease-out;
+  color: #777777;
+  position: absolute;
+  top: 20%;
+  left: 18px;
+  transform: scale(0.95);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.input-base {
+  border-radius: 10px;
+}
+
+#input:focus ~ #label-input,
+#input:not(:placeholder-shown) ~ #label-input {
+  top: -60% !important;
+  left: 2px !important;
+  transform: scale(0.8);
+  color: #8d2bc1;
+  padding: 0 6px;
+  opacity: 1;
+  font-weight: 600;
+}
+
+#input:not(:focus):not(:placeholder-shown) ~ #label-input {
+  color: #777777;
+  font-weight: 400;
+}
+
+#input {
+  transition: outline 0.2s ease;
+  font-size: 1rem;
+  outline-color: var(--button-text);
+  outline: unset;
+  border: 1px solid #bbbbbb;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+#input:focus {
+  box-shadow: 0 0 0 1px #ce00ff47, 0 0 0 3px rgb(166 25 235 / 23%);
+  border: 1px solid #b200ff;
+}
+
+.relative {
+  position: relative;
+}

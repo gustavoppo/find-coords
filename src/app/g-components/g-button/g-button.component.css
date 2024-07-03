@@ -1,0 +1,69 @@
+
+.g-rounded {
+  border-radius: 999em;
+}
+.g-outline {
+  border: 1px solid black;
+  background: transparent;
+  color: #000;
+}
+.g-text {
+  color: #000;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+button {
+  font-weight: 500;
+  font-size: larger;
+  height: 3em;
+  width: 6em;
+  position: relative;
+  border: none;
+  overflow: hidden;
+  isolation: isolate;
+  color: white;
+  background: red;
+  box-shadow: 1px 2px 4px #0007;
+  transition: background-color 0.2s;
+}
+
+button > span {
+  position: relative;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.ripple-container {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 0.5em);
+}
+
+.ripple-container > span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ripple-container > span::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  background: hsla(0, 0%, 98%, 0.319);
+  transition: width 0.5s ease-out, height 0.5s ease-out, opacity 1s;
+  width: 13em;
+  height: 13em;
+  opacity: 0;
+  border-radius: 999em;
+}
+
+.ripple-container > span:active::after {
+  transition: 0s;
+  width: 0em;
+  height: 0em;
+  opacity: 1;
+}
