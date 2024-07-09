@@ -1,31 +1,81 @@
-import { Component } from '@angular/core';
-import { GoogleMap, GoogleMapsModule, MapMarker } from '@angular/google-maps';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import {
+  GoogleMap,
+  GoogleMapsModule,
+  MapInfoWindow,
+  MapMarker,
+} from '@angular/google-maps';
 import { CardModule } from 'primeng/card';
-
+import { GeocodingService } from '../../services/geocoding.service';
+interface MarkerProperties {
+  position: {
+    lat: number;
+    lng: number;
+  };
+}
 @Component({
   selector: 'fc-map',
   standalone: true,
-  imports: [CardModule, GoogleMap, MapMarker],
+  imports: [CardModule, GoogleMap, MapMarker, GoogleMapsModule],
   templateUrl: './fc-map.component.html',
-  styleUrl: './fc-map.component.css',
+  styleUrls: ['./fc-map.component.css'],
 })
-export class FcMapComponent {
-  world = 0;
-  continent = 5;
-  city = 10;
-  street = 15;
-  builds = 20;
+export class FcMapComponent implements OnChanges, OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
 
-  center: google.maps.LatLngLiteral = { lat: -15.829557281659453, lng: -47.87935511823883 };
-  zoom = 4;
-  markerOptions: google.maps.MarkerOptions = { draggable: false };
-  markerPositions: google.maps.LatLngLiteral[] = [];
+  @Input('inputPosition') inputPosition: string ;
 
-  addMarker(event: google.maps.MapMouseEvent) {
-    if (event.latLng) {
-      this.markerPositions.push(event.latLng.toJSON());
-      console.log('long, ' ,event.latLng.lng());
-      console.log('lat, ' ,event.latLng.lat());
+  options: google.maps.MapOptions = {
+    mapTypeId: 'roadmap',
+    zoomControl: true,
+    scrollwheel: true,
+    disableDoubleClickZoom: false,
+  };
+  markers: MarkerProperties[] = [
+    { position: { lat: -23.1791, lng: -45.8872 } },
+  ];
+  zoom = 15;
+  info: any;
+  address: any;
+  markerElem: any;
+  infoContent: any;
+  center: google.maps.LatLngLiteral;
+
+  constructor(private geocodingService: GeocodingService) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['inputPosition']) {
+      if (this.inputPosition) {
+        this.address = this.inputPosition;
+        this.geocodingService.getLocation(this.address).subscribe(
+          (data: any) => {
+            let lat = data.results[0].geometry.location;
+            this.center = lat;
+            this.markers.push({
+              position: lat,
+            });
+          },
+          (error: any) => {
+            console.error('Geocoding error:', error);
+          },
+          () => {
+            console.log('Geocoding complete!');
+          }
+        );
+      }
     }
+  }
+
+
+  ngOnInit() {
+    this.center = this.markers[0].position;
   }
 }

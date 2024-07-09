@@ -1,4 +1,8 @@
-<div class="flex ml-8 mt-8 gap-6">
-  <fc-search></fc-search>
-  <fc-map></fc-map>
-</div>
+<section class="flex flex-col mx-4 my-4 gap-4 h-95vh lg:flex-row items-center">
+  <div class="w-full lg:w-2/4">
+    <fc-search (getInput)="inputPositionEvent($event)"></fc-search>
+  </div>
+  <div class="w-full h-full">
+    <fc-map [inputPosition]="inputPosition"></fc-map>
+  </div>
+</section>

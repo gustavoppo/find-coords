@@ -41,6 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-
-
-src/app/utils/google-key.ts
+/src/app/utils
